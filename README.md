@@ -17,27 +17,27 @@ import { WindowVirtualizer as WVList } from "virtua";
 ```
 import ettikten sonra 
 ```
-      <WVList>
-        {post.map((item, index) => (
-          <Posts img={item.url} title={item.title} key={index} />
-        ))}
-      </WVList>
+<WVList>
+  {post.map((item, index) => (
+    <Posts img={item.url} title={item.title} key={index} />
+   ))}
+ </WVList>
 ```
 
 bu kadar basit bir kulkanımı var ve ben tek bunu yapmadım yoksa dökümasyonu kopyalamak olurdu bu sonsuz bir scroll efekti vermeye çalıştım önce 
 ```
-  const slicePosts = posts.slice(0, 10);
+const slicePosts = posts.slice(0, 10);
 ```
 
 5000 olan item sayısını 10 a düşürdüm yoksa bunu denemek saatler sürerdi...
 
 WindowVirtualizer in onRangeChange() diye bir propsu var bize start ve end i veriyor onları kullanarak çeşitli şeyler yapabiliriz ben sonsuz bir scroll efekti vermeyi seçtim
 ```
-        onRangeChange={(start, end) => {
-          if (end + 1 === post.length) {
+onRangeChange={(start, end) => {
+      if (end + 1 === post.length) {
             setPost((prev) => [...prev, ...post]);
-          }
-        }}
+      }
+}}
 ```
 
 video da da göründügü gibi sonsuz  bir scroll
