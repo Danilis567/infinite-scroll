@@ -1,21 +1,21 @@
-# infinite-scroll
-virtua ile sonsuz scroll örnegi 
+# Sonsuz Scroll Örneği - Virtua ile
 
-virtua, React uygulamalarında sanal liste (virtualized list) oluşturmak için kullanılan bir kütüphanedir. Sanal liste, büyük veri setlerini daha etkili bir şekilde işlemek ve performansı artırmak için ekranda görünen öğeleri yalnızca ihtiyaç duyulduğunda render etmek anlamına gelir. 
+`virtua`, React uygulamalarında büyük veri setleriyle daha etkili bir şekilde çalışmak ve performansı artırmak için kullanılan bir sanal liste (virtualized list) kütüphanesidir. Sanal liste, ekranda görünen öğeleri yalnızca ihtiyaç duyulduğunda render ederek büyük veri setlerini daha etkili bir şekilde işler.
 
-
-bu projede jsonplaceholder in apisini kullandım
+Bu örnekte, JSONPlaceholder API'sini kullanarak bir örnek uygulama geliştirdim. API adresi şu şekildedir:
 
 ```
 https://jsonplaceholder.typicode.com/photos
 ```
 
-yaklaşık 5000 tane item var... virtua paketi de bu gibi durumlarda kullanılır yukarıda açıkladığım gibi ekranda sadece 10 tane item oluyor 5000 yerine ve biz kaydırdıkça içerik değişiyor ama sayı hala 10 bu bizde performans açısından avantaj kazandırıyor (5000 itemi yazdırmak eski cihazlarda büyük sorun yaratır 🤧)
+API'den alınan verilerle yaklaşık 5000 öğe bulunmaktadır. `virtua` paketi, bu gibi durumlarda kullanılarak ekranda sadece görünen 10 öğe ile çalışabilir. Bu, 5000 öğeyi ekrana yazdırmak yerine, sadece görünen öğeleri render ederek performans avantajı sağlar (5000 öğeyi yazdırmak eski cihazlarda büyük sorunlara neden olabilir 🤧).
+
 
 ```
 import { WindowVirtualizer as WVList } from "virtua";
 ```
-import ettikten sonra 
+Yukarıdaki kütüphaneyi projeye ekledikten sonra, aşağıdaki gibi kullanabilirsiniz:
+
 ```
 <WVList>
   {post.map((item, index) => (
@@ -23,15 +23,18 @@ import ettikten sonra
    ))}
  </WVList>
 ```
+Bu basit kullanım, projenize virtua paketini entegre ederek ve API'den alınan verileri efektif bir şekilde işleyerek sonsuz bir scroll efekti elde etmenizi sağlar.
 
-bu kadar basit bir kulkanımı var ve ben tek bunu yapmadım yoksa dökümasyonu kopyalamak olurdu bu sonsuz bir scroll efekti vermeye çalıştım önce 
 ```
 const slicePosts = posts.slice(0, 10);
 ```
 
-5000 olan itemlerden 0 ila 10 arasındakileri aldım yoksa bunu denemek saatler sürerdi...
 
-WindowVirtualizer in onRangeChange() diye bir propsu var bize start ve end i veriyor onları kullanarak çeşitli şeyler yapabiliriz ben sonsuz bir scroll efekti vermeyi seçtim
+5000 olan itemlerden 0 ila 10 arasındakileri aldım; yoksa bunu denemek saatler sürerdi.
+
+WindowVirtualizer'ın onRangeChange() diye bir prop'u var. Bize start ve end'i veriyor. Onları kullanarak çeşitli şeyler yapabiliriz. Ben, sonsuz bir scroll efekti vermeyi seçtim.
+
+
 ```
 onRangeChange={(start, end) => {
       if (end + 1 === post.length) {
@@ -39,8 +42,7 @@ onRangeChange={(start, end) => {
       }
 }}
 ```
-
-video da da göründügü gibi sonsuz bir scroll...
+Video'da da göründüğü gibi, sonsuz bir scroll...
 
 https://github.com/Danilis567/infinite-scroll/assets/134603964/c0dd2bc4-a0bc-47e6-b3da-3332e1910dae
 
