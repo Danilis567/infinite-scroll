@@ -4,19 +4,19 @@
 
 Bu örnekte, JSONPlaceholder API'sini kullanarak bir örnek uygulama geliştirdim. API adresi şu şekildedir:
 
-```
+```jsx
 https://jsonplaceholder.typicode.com/photos
 ```
 
 API'den alınan verilerle yaklaşık 5000 öğe bulunmaktadır. `virtua` paketi, bu gibi durumlarda kullanılarak ekranda sadece görünen 10 öğe ile çalışabilir. Bu, 5000 öğeyi ekrana yazdırmak yerine, sadece görünen öğeleri render ederek performans avantajı sağlar (5000 öğeyi yazdırmak eski cihazlarda büyük sorunlara neden olabilir 🤧).
 
 
-```
+```jsx
 import { WindowVirtualizer as WVList } from "virtua";
 ```
 Yukarıdaki kütüphaneyi projeye ekledikten sonra, aşağıdaki gibi kullanabilirsiniz:
 
-```
+```jsx
 <WVList>
   {post.map((item, index) => (
     <Posts img={item.url} title={item.title} key={index} />
@@ -25,7 +25,7 @@ Yukarıdaki kütüphaneyi projeye ekledikten sonra, aşağıdaki gibi kullanabil
 ```
 Bu basit kullanım, projenize virtua paketini entegre ederek ve API'den alınan verileri efektif bir şekilde işleyerek sonsuz bir scroll efekti elde etmenizi sağlar.
 
-```
+```jsx
 const slicePosts = posts.slice(0, 10);
 ```
 
@@ -35,7 +35,7 @@ const slicePosts = posts.slice(0, 10);
 WindowVirtualizer'ın onRangeChange() diye bir prop'u var. Bize start ve end'i veriyor. Onları kullanarak çeşitli şeyler yapabiliriz. Ben, sonsuz bir scroll efekti vermeyi seçtim.
 
 
-```
+```jsx
 onRangeChange={(start, end) => {
       if (end + 1 === post.length) {
             setPost((prev) => [...prev, ...post]);
